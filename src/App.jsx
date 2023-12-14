@@ -8,7 +8,7 @@ import Item from './components/Item';
 const App = () => {
 
  const [todos, setTodos] = useState([]);
- 
+ const [filter, setFilter] = useState('all');
 
   //function to add a new todo
   const addTodo = (text) => {
@@ -46,11 +46,45 @@ const App = () => {
     setTodos(todoItems)
   }
 
+  //Function to update filter value
+  const setFilterValue = (value) => setFilter(value);
+
+  //Function to get number of displayed items
+  const getNum = () => {
+    if(filter === 'all') {
+      return todos.length
+    }else if (filter === 'active'){
+    return todos.filter(todo =>!todo.complete).length
+    }else if (filter === 'complete'){
+      return todos.filter(todo =>todo.complete).length
+    }
+    return 0;
+  }
+
+  //Function to render todo based on filter
+  const renderTodos = () => {
+    let filteredList;
+    if (filter === 'all' ) {
+      filteredList = todos
+    }else if(filter === 'active'){
+      filteredList = todos.filter(todo => !todo.complete)
+    }else if(filter === 'complete') {
+      filteredList = todos.filter(todo => todo.complete)
+    }else{
+      filteredList = todos;
+    }
+
+    return filteredList.map(todo =>(
+      <Item key={todo.id} data = {todo} deleteHandler={removeTodoById} updateStatus={toggleTodoStatus} />
+    ))
+  }
+
+
   return (
     <div className='min-h-screen bg-[#E3E4F1] text-white'>
       <div className="bg-mobile_img h-52 px-5 py-8">
         <div className='flex justify-between items-center lg:w-[50%] lg:mx-auto'>
-          <h1 className='text-3xl font-semibold tracking-[6px] px-4'>TODO</h1>
+          <h1 className='text-3xl font-semibold tracking-[6px]'>TODO</h1>
           <FaMoon className='w-6 h-6'/>
         </div>
         <div className='mt-10 lg:w-[50%] lg:mx-auto'>
@@ -59,12 +93,16 @@ const App = () => {
         </div>
       </div>
       <div className='mx-5 bg-white rounded-md relative -top-8 lg:w-[48%] lg:mx-auto'>
-        {todos.map((todo) => <Item key={todo.id} data={todo} deleteHandler={removeTodoById} updateStatus={toggleTodoStatus}/>)}
+        {/*todos.map((todo) =>
+         <Item key={todo.id} 
+         data={todo} 
+         deleteHandler={removeTodoById}
+          updateStatus={toggleTodoStatus}/>)*/}
        
-        
+        {renderTodos()}
 
         <div className='flex justify-between items-center text-sm mx-5 h-14'>
-          <p className='text-[#494C6B]'>5 items left</p>
+          <p className='text-[#494C6B]'>{getNum()} items left </p>
           <button 
           type='button' 
           className='text-[#494C6B] focus:font-bold'
@@ -74,7 +112,7 @@ const App = () => {
         
       </div>
       <div className='mx-5 lg:w-[48%] lg:mx-auto'>
-        <Filter/>
+        <Filter filterValue={setFilterValue}/>
       </div>
 
       <div className='text-center py-8  lg:w-[48%] lg:mx-auto'>
