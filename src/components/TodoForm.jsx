@@ -4,7 +4,6 @@ import { FaRegCircle } from "react-icons/fa";
 
 const TodoForm = ({addHandler}) => {
   
-
   const [item, setItem] = useState('');
 
   const handleSubmit = (e) => {
@@ -15,20 +14,20 @@ const TodoForm = ({addHandler}) => {
   }
 
   return (
-    <div className='bg-white py-2 px-5 rounded-md'>
-      <form className='flex items-center '  onSubmit={handleSubmit}
-      >
-      <FaRegCircle className='h-4 w-4 mr-3 text-[#494C6B]'/>
+    <div className=' py-2 px-5 rounded-md'>
+      <form className='flex items-center '  onSubmit={handleSubmit}>
+      <FaRegCircle className='h-4 w-4 mr-3 text-[#393A4B]'/>
         <div className='w-4/5 text-[#494C6B]'>
             <input
             required
+            className='p-2 rounded-md'
             value={item}
             onChange={(e) => setItem(e.target.value)}
             type='text'
             placeholder='Create new to do item...'
             />
         </div>
-        <button type='submit' className='rounded-md text-[#494C6B] bg-purple-200 p-2'>Add</button>
+        <button type='submit' className='rounded-lg text-[#494C6B] bg-gradient-to-r from-purple-400 to-blue-400 p-2'>Add</button>
       </form>
     </div>
   )

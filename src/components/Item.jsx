@@ -11,7 +11,7 @@ const Item = ({data, deleteHandler, updateStatus}) => {
 
           <FaCheckCircle 
             onClick={() => updateStatus(data.id)}
-            className='h-4 w-4 mr-3 text-blue-500' />
+            className='h-4 w-4 mr-3 text-blue-400' />
             :
             <FaRegCircle 
             onClick={() => updateStatus(data.id)}
@@ -22,7 +22,7 @@ const Item = ({data, deleteHandler, updateStatus}) => {
         </div>
         <RxCross1 
         onClick={() => deleteHandler(data.id)} 
-        className='h-4 w-4 mr-3 text-red-600' 
+        className='h-4 w-4 mr-3 text-red-500' 
         />
       </div>
     </div>

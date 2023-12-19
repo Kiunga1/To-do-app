@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { FaMoon } from "react-icons/fa";
+import { FaMoon,  FaSun} from "react-icons/fa";
 import './App.css'
 import TodoForm from './components/TodoForm';
 import Filter from './components/Filter';
 import Item from './components/Item';
 
+import { GetThemeValues } from './components/ContextTheme';
+
 const App = () => {
+
+  const {darkMode, themeHandler} = GetThemeValues()
 
  const [todos, setTodos] = useState([]);
  const [filter, setFilter] = useState('all');
@@ -27,7 +31,6 @@ const App = () => {
     setTodos(newList);
   }
 
-  
   // Function to check status
   const toggleTodoStatus = (id) => {
     setTodos(
@@ -78,24 +81,25 @@ const App = () => {
       <Item key={todo.id} data = {todo} deleteHandler={removeTodoById} updateStatus={toggleTodoStatus} />
     ))
   }
-
+  //'  '
 
   return (
-    <div className='min-h-screen bg-[#E3E4F1] text-white'>
+    <div className={`${darkMode ? "bg-[#171823] " : "bg-[#E3E4F1]"}  min-h-screen text-white cursor-pointer `}>
       <div className="bg-mobile_img h-52 px-5 py-8">
         <div className='flex justify-between items-center lg:w-[50%] lg:mx-auto'>
           <h1 className='text-3xl font-semibold tracking-[6px]'>TODO</h1>
-          <FaMoon className='w-6 h-6'/>
+          {darkMode ? <FaSun onClick={themeHandler} className='w-6 h-6'/> : <FaMoon onClick={themeHandler} className='w-6 h-6' />}
         </div>
-        <div className='mt-10 lg:w-[50%] lg:mx-auto'>
+        <div className={`${darkMode ? 'bg-[#25273D] text-white-400' : 'bg-white text-black'} mt-10 lg:w-[50%] lg:mx-auto rounded-md`}>
           <TodoForm addHandler={addTodo}
           />
         </div>
       </div>
-      <div className='mx-5 bg-white rounded-md relative -top-8 lg:w-[48%] lg:mx-auto'>
+      
+      <div className={`${darkMode ? 'bg-[#25273D]  ' : 'bg-white'} mx-5 rounded-md relative -top-8 lg:w-[48%] lg:mx-auto`}>
         {/*todos.map((todo) =>
          <Item key={todo.id} 
-         data={todo} 
+         data={todo} ''
          deleteHandler={removeTodoById}
           updateStatus={toggleTodoStatus}/>)*/}
        
@@ -111,7 +115,7 @@ const App = () => {
         </div>
         
       </div>
-      <div className='mx-5 lg:w-[48%] lg:mx-auto'>
+      <div className={`${darkMode ? 'bg-[#25273D]' : 'bg-white'} rounded-md mx-5 lg:w-[48%] lg:mx-auto`}>
         <Filter filterValue={setFilterValue}/>
       </div>
 
