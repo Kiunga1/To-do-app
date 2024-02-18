@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { FaMoon,  FaSun} from "react-icons/fa";
 import './App.css'

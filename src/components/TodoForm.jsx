@@ -20,7 +20,7 @@ const TodoForm = ({addHandler}) => {
         <div className='w-4/5 text-[#494C6B]'>
             <input
             required
-            className='p-2 rounded-md'
+            className='p-2 rounded-md bg-transparent'
             value={item}
             onChange={(e) => setItem(e.target.value)}
             type='text'

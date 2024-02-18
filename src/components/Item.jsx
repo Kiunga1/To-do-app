@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { RxCross1 } from "react-icons/rx";
 import { FaRegCircle, FaCheckCircle} from "react-icons/fa";
